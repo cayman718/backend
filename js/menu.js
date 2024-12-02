@@ -147,3 +147,36 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化購物車顯示
     updateCartDisplay();
 });
+
+// 初始化分類功能
+document.addEventListener('DOMContentLoaded', function() {
+    // 獲取所有分類按鈕和菜單項目
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    // 為每個分類按鈕添加點擊事件
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // 移除所有按鈕的 active 類別
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            // 為當前點擊的按鈕添加 active 類別
+            this.classList.add('active');
+
+            // 獲取選擇的分類
+            const selectedCategory = this.dataset.category;
+
+            // 顯示/隱藏相應的菜單項目
+            menuItems.forEach(item => {
+                if (selectedCategory === 'all') {
+                    item.style.display = 'block';
+                } else {
+                    if (item.dataset.category === selectedCategory) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+});
