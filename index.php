@@ -21,10 +21,10 @@ require_once 'includes/auth.php';
         <div class="hero-content">
             <h1>品味美食的藝術</h1>
             <p>讓每一道料理都成為難忘的回憶</p>
-        </div>
-        <div class="hero-buttons">
-            <a href="menu.php" class="btn btn-primary">瀏覽菜單</a>
-            <a href="reservation.php" class="btn btn-secondary">立即訂位</a>
+            <div class="hero-buttons">
+                <a href="menu.php" class="btn btn-primary">瀏覽菜單</a>
+                <a href="reservation.php" class="btn btn-secondary">立即訂位</a>
+            </div>
         </div>
     </div>
 
@@ -71,7 +71,7 @@ require_once 'includes/auth.php';
                 <div class="footer-info">
                     <h3>聯絡我們</h3>
                     <p><i class="fas fa-map-marker-alt"></i> 台北市中山區...</p>
-                    <p><i class="fas fa-phone"></i> 02-XXXX-XXXX</p>
+                    <p><i class="fas fa-phone"></i> 02-2222-2222</p>
                 </div>
                 <div class="footer-hours">
                     <h3>營業時間</h3>
