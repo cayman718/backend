@@ -62,14 +62,14 @@ body {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('your-hero-image.jpg');
     background-size: cover;
     background-position: center;
-    height: 500px;
+    height: 300px;
     /* border-radius: 15px; */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
-    margin-bottom: 3rem;
+    /* margin-bottom: 3rem; */
 }
 
 .hero-content {

@@ -8,6 +8,7 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>餐廳菜單</title>
     <meta charset="utf-8">
@@ -16,10 +17,12 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
     <!-- 加入 Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 <body>
     <?php include 'includes/nav.php'; ?>
-    
-    <div class="menu-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://picsum.photos/id/9/1200/800');">
+
+    <div class="menu-hero"
+        style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://picsum.photos/id/9/1200/800');">
         <h1>精選菜單</h1>
         <p>用心製作的每一道佳餚</p>
     </div>
@@ -37,7 +40,8 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
             <!-- 前菜 -->
             <div class="menu-item" data-category="appetizer" data-price="180">
                 <div class="menu-item-image">
-                    <img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=600" alt="凱薩沙拉">
+                    <img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=600"
+                        alt="凱薩沙拉">
                     <div class="menu-item-badge">主廚推薦</div>
                 </div>
                 <div class="menu-item-content">
@@ -54,7 +58,8 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
 
             <div class="menu-item" data-category="appetizer" data-price="200">
                 <div class="menu-item-image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrrEDPI-gjy8GLG2xEiZByJC3H3wurpTjRsg&s" alt="蒜香蘑菇">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrrEDPI-gjy8GLG2xEiZByJC3H3wurpTjRsg&s"
+                        alt="蒜香蘑菇">
                 </div>
                 <div class="menu-item-content">
                     <h3>蒜香蘑菇</h3>
@@ -71,7 +76,8 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
             <!-- 主菜 -->
             <div class="menu-item" data-category="main" data-price="580">
                 <div class="menu-item-image">
-                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600" alt="紐約客牛排">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600"
+                        alt="紐約客牛排">
                     <div class="menu-item-badge">主廚推薦</div>
                 </div>
                 <div class="menu-item-content">
@@ -88,7 +94,8 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
 
             <div class="menu-item" data-category="main" data-price="620">
                 <div class="menu-item-image">
-                    <img src="https://images.unsplash.com/photo-1485921325833-c519f76c4927?auto=format&fit=crop&w=600" alt="香煎鮭魚">
+                    <img src="https://images.unsplash.com/photo-1485921325833-c519f76c4927?auto=format&fit=crop&w=600"
+                        alt="香煎鮭魚">
                 </div>
                 <div class="menu-item-content">
                     <h3>香煎鮭魚</h3>
@@ -105,7 +112,8 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
             <!-- 甜點 -->
             <div class="menu-item" data-category="dessert" data-price="220">
                 <div class="menu-item-image">
-                    <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600" alt="提拉米蘇">
+                    <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600"
+                        alt="提拉米蘇">
                     <div class="menu-item-badge">主廚推薦</div>
                 </div>
                 <div class="menu-item-content">
@@ -122,7 +130,8 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
 
             <div class="menu-item" data-category="dessert" data-price="180">
                 <div class="menu-item-image">
-                    <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600" alt="巧克力布朗尼">
+                    <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600"
+                        alt="巧克力布朗尼">
                 </div>
                 <div class="menu-item-content">
                     <h3>巧克力布朗尼</h3>
@@ -139,7 +148,8 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
             <!-- 飲品 -->
             <div class="menu-item" data-category="drinks" data-price="320">
                 <div class="menu-item-image">
-                    <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&w=600" alt="波爾多紅酒">
+                    <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&w=600"
+                        alt="波爾多紅酒">
                     <div class="menu-item-badge">主廚推薦</div>
                 </div>
                 <div class="menu-item-content">
@@ -156,7 +166,8 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
 
             <div class="menu-item" data-category="drinks" data-price="150">
                 <div class="menu-item-image">
-                    <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600" alt="季節鮮果汁">
+                    <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600"
+                        alt="季節鮮果汁">
                 </div>
                 <div class="menu-item-content">
                     <h3>季節鮮果汁</h3>
@@ -207,4 +218,5 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
     <!-- JavaScript -->
     <script src="js/menu.js" defer></script>
 </body>
-</html> 
+
+</html>
