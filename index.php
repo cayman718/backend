@@ -21,7 +21,7 @@ require_once 'includes/auth.php';
 
     .hero-section {
         background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            url('path/to/your/hero-image.jpg') center/cover no-repeat;
+            url('./img/background.jpeg') center/cover no-repeat;
         min-height: 100vh;
         display: flex;
         align-items: center;

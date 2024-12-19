@@ -25,7 +25,10 @@ try {
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
 </head>
+
 
 <body class="bg-light">
     <?php include 'includes/nav.php'; ?>
@@ -37,17 +40,19 @@ try {
                     <div class="card-body p-4">
                         <div class="text-center mb-4">
                             <div class="avatar-circle mb-3">
-                                <i class="bi bi-person-circle display-1 text-primary"></i>
+                                <lord-icon src="https://cdn.lordicon.com/dxjqoygy.json" trigger="hover"
+                                    colors="primary:#121331" style="width:100px;height:100px">
+                                </lord-icon>
                             </div>
                             <h2 class="h3">歡迎回來，<?php echo htmlspecialchars($user['username']); ?>！</h2>
                         </div>
 
                         <?php if (isset($_SESSION['success'])): ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <?php echo $_SESSION['success'];
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?php echo $_SESSION['success'];
                                 unset($_SESSION['success']); ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                         <?php endif; ?>
 
                         <!-- 用戶詳細資訊 -->

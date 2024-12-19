@@ -14,7 +14,10 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/menu.css">
-    <!-- 加入 Font Awesome -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 原有的 Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
@@ -22,7 +25,7 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
     <?php include 'includes/nav.php'; ?>
 
     <div class="menu-hero"
-        style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://picsum.photos/id/9/1200/800');">
+        style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./img/din.jpg');">
         <h1>精選菜單</h1>
         <p>用心製作的每一道佳餚</p>
     </div>
@@ -216,6 +219,7 @@ $categories = $pdo->query("SELECT * FROM menu_categories ORDER BY sort_order")->
     </div>
 
     <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/menu.js" defer></script>
 </body>
 
