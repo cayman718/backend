@@ -19,142 +19,182 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>會員中心</title>
-    <!-- Bootstrap CSS -->
+    <title>會員中心 | Fine Dining</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <style>
+    body {
+        background: #f5f7fe;
+    }
+
+    .dashboard-wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .dashboard-card {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
+        background: linear-gradient(145deg, #ffffff, #fcfcff);
+    }
+
+    .card-title {
+        font-weight: bold;
+    }
+
+    .feature-icon {
+        font-size: 2rem;
+        color: #4834d4;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #4834d4, #686de0);
+        border: none;
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(72, 52, 212, 0.2);
+    }
+
+    .account-info {
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .account-info .card {
+        border: none;
+        border-radius: 15px;
+        background: #f8f9fa;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .account-info h4 {
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .info-item i {
+        font-size: 1.5rem;
+        color: #4834d4;
+        margin-right: 15px;
+    }
+
+    .info-item span {
+        font-size: 1rem;
+        color: #333;
+    }
+    </style>
 </head>
 
-
-<body class="bg-light">
+<body>
     <?php include 'includes/nav.php'; ?>
+
     <div class="container py-5">
-        <div class="row">
-            <!-- 左側選單 -->
-            <div class="col-lg-3 mb-4">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body text-center p-4">
-                        <div class="mb-3">
-                            <lord-icon src="https://cdn.lordicon.com/dxjqoygy.json" trigger="hover"
-                                colors="primary:#3b71ca" style="width:80px;height:80px">
-                            </lord-icon>
+        <div class="dashboard-wrapper">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">歡迎回來，<?php echo htmlspecialchars($user['username']); ?>！</h2>
+                <p class="text-muted">探索會員中心的最新功能</p>
+            </div>
+
+            <!-- 帳戶資料區塊 -->
+            <div class="account-info mb-5">
+                <h4 class="mb-4">帳戶資訊</h4>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card p-3">
+                            <div class="info-item">
+                                <i class="bi bi-person"></i>
+                                <div>
+                                    <h6 class="mb-1">會員帳號</h6>
+                                    <span><?php echo htmlspecialchars($user['username']); ?></span>
+                                </div>
+                            </div>
                         </div>
-                        <h5 class="mb-1"><?php echo htmlspecialchars($user['username']); ?></h5>
-                        <p class="text-muted small mb-3"><?php echo htmlspecialchars($user['email']); ?></p>
-                        <hr class="my-3">
-                        <div class="d-grid">
-                            <a href="profile.php" class="btn btn-outline-primary mb-2">編輯個人資料</a>
-                            <a href="process/logout_process.php" class="btn btn-outline-danger">登出</a>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-3">
+                            <div class="info-item">
+                                <i class="bi bi-calendar"></i>
+                                <div>
+                                    <h6 class="mb-1">註冊時間</h6>
+                                    <span><?php echo htmlspecialchars($user['created_at']); ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-3">
+                            <div class="info-item">
+                                <i class="bi bi-envelope"></i>
+                                <div>
+                                    <h6 class="mb-1">電子信箱</h6>
+                                    <span><?php echo htmlspecialchars($user['email']); ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-3">
+                            <div class="info-item">
+                                <i class="bi bi-telephone"></i>
+                                <div>
+                                    <h6 class="mb-1">聯絡電話</h6>
+                                    <span><?php echo htmlspecialchars($user['phone']); ?></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 右側內容 -->
-            <div class="col-lg-9">
-                <!-- 歡迎橫幅 -->
-                <div class="card border-0 bg-primary bg-gradient text-white shadow-sm mb-4">
-                    <div class="card-body p-4">
-                        <h4 class="mb-1">歡迎回來！</h4>
-                        <p class="mb-0 opacity-75">查看您的帳戶資訊和最新動態</p>
+            <div class="row g-4">
+                <!-- 功能卡片：訂位管理 -->
+                <div class="col-md-4">
+                    <div class="dashboard-card p-4 text-center">
+                        <i class="bi bi-calendar2-check feature-icon mb-3"></i>
+                        <h5 class="card-title">訂位管理</h5>
+                        <p class="text-muted">輕鬆管理您的訂位記錄</p>
+                        <a href="reservation.php" class="btn btn-primary">立即查看</a>
                     </div>
                 </div>
 
-                <!-- 快速操作按鈕 -->
-                <div class="row g-4 mb-4">
-                    <div class="col-md-4">
-                        <a href="reservation.php" class="card h-100 border-0 shadow-sm hover-lift text-decoration-none">
-                            <div class="card-body p-4">
-                                <div class="feature-icon bg-primary bg-opacity-10 text-primary rounded-3 mb-3">
-                                    <i class="bi bi-calendar2-check fs-4"></i>
-                                </div>
-                                <h5 class="card-title text-dark">訂位管理</h5>
-                                <p class="card-text text-muted small">查看您的訂位記錄</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-4">
-                        <a href="menu.php" class="card h-100 border-0 shadow-sm hover-lift text-decoration-none">
-                            <div class="card-body p-4">
-                                <div class="feature-icon bg-success bg-opacity-10 text-success rounded-3 mb-3">
-                                    <i class="bi bi-book fs-4"></i>
-                                </div>
-                                <h5 class="card-title text-dark">菜單瀏覽</h5>
-                                <p class="card-text text-muted small">查看最新餐點資訊</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-4">
-                        <a href="profile.php" class="card h-100 border-0 shadow-sm hover-lift text-decoration-none">
-                            <div class="card-body p-4">
-                                <div class="feature-icon bg-info bg-opacity-10 text-info rounded-3 mb-3">
-                                    <i class="bi bi-person-gear fs-4"></i>
-                                </div>
-                                <h5 class="card-title text-dark">帳戶設定</h5>
-                                <p class="card-text text-muted small">管理您的個人資料</p>
-                            </div>
-                        </a>
+                <!-- 功能卡片：菜單瀏覽 -->
+                <div class="col-md-4">
+                    <div class="dashboard-card p-4 text-center">
+                        <i class="bi bi-book feature-icon mb-3"></i>
+                        <h5 class="card-title">菜單瀏覽</h5>
+                        <p class="text-muted">探索最新的美味料理</p>
+                        <a href="menu.php" class="btn btn-primary">查看菜單</a>
                     </div>
                 </div>
 
-                <!-- 帳戶資訊卡片 -->
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-transparent border-0 pt-4 pb-2">
-                        <h5 class="mb-0">帳戶資訊</h5>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
-                                    <i class="bi bi-person text-primary me-3"></i>
-                                    <div>
-                                        <div class="text-muted small">會員帳號</div>
-                                        <div class="fw-medium"><?php echo htmlspecialchars($user['username']); ?></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
-                                    <i class="bi bi-envelope text-primary me-3"></i>
-                                    <div>
-                                        <div class="text-muted small">電子信箱</div>
-                                        <div class="fw-medium"><?php echo htmlspecialchars($user['email']); ?></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
-                                    <i class="bi bi-calendar3 text-primary me-3"></i>
-                                    <div>
-                                        <div class="text-muted small">註冊時間</div>
-                                        <div class="fw-medium"><?php echo $user['created_at']; ?></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="d-flex align-items-center p-3 bg-light rounded-3">
-                                    <i class="bi bi-telephone text-primary me-3"></i>
-                                    <div>
-                                        <div class="text-muted small">聯絡電話</div>
-                                        <div class="fw-medium"><?php echo htmlspecialchars($user['phone'] ?? '尚未設定'); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <!-- 功能卡片：帳戶設定 -->
+                <div class="col-md-4">
+                    <div class="dashboard-card p-4 text-center">
+                        <i class="bi bi-person-gear feature-icon mb-3"></i>
+                        <h5 class="card-title">帳戶設定</h5>
+                        <p class="text-muted">個人化您的帳戶資訊</p>
+                        <a href="profile.php" class="btn btn-primary">前往設定</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

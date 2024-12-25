@@ -17,220 +17,201 @@ try {
 <html>
 
 <head>
-    <title>修改個人資料</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人資料設定 | Fine Dining</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-    .card {
-        border: none;
-        border-radius: 15px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.08) !important;
+    body {
+        background: #f5f7fe;
     }
 
-    .card-header {
-        background: linear-gradient(135deg, #0d6efd, #0b5ed7);
-        border-bottom: none;
+    .profile-wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .profile-card {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
+        background: linear-gradient(145deg, #ffffff, #fcfcff);
+    }
+
+    .form-control {
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        padding: 12px 18px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
     }
 
     .form-control:focus {
-        border-color: #0d6efd;
-        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+        border-color: #4834d4;
+        box-shadow: 0 0 0 4px rgba(72, 52, 212, 0.1);
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #2d3436;
+        margin-bottom: 0.7rem;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #4834d4, #686de0);
+        border: none;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(72, 52, 212, 0.2);
+    }
+
+    .btn-outline-secondary {
+        border: 2px solid #e9ecef;
+        color: #6c757d;
+    }
+
+    .btn-outline-secondary:hover {
+        background: #f8f9fa;
+        transform: translateY(-2px);
     }
 
     .input-group-text {
         border: none;
         background-color: #f8f9fa;
-    }
-
-    .btn-primary {
-        background: linear-gradient(135deg, #0d6efd, #0b5ed7);
-        border: none;
-        padding: 12px 20px;
-        transition: all 0.3s ease;
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.2);
-    }
-
-    .btn-outline-secondary {
-        border-width: 2px;
-        padding: 12px 20px;
-        transition: all 0.3s ease;
-    }
-
-    .btn-outline-secondary:hover {
-        transform: translateY(-2px);
-    }
-
-    .form-label {
-        color: #495057;
-        font-size: 0.95rem;
-    }
-
-    .input-group {
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .form-control {
-        border: 1px solid #e9ecef;
-        padding: 12px;
+        border-radius: 12px;
     }
 
     .alert {
         border: none;
-        border-radius: 10px;
+        border-radius: 12px;
     }
 
-    .card-body {
-        padding: 2rem;
+    .section-title {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 2rem;
+    }
+
+    .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 40px;
+        height: 4px;
+        background: #4834d4;
+        border-radius: 2px;
     }
     </style>
 </head>
 
-<body class="bg-light">
+<body>
     <?php include 'includes/nav.php'; ?>
-    <div class="content-wrapper">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card shadow">
-                        <div class="card-header text-white text-center py-4 rounded-top">
-                            <h2 class="card-title mb-0">
-                                <i class="bi bi-person-circle me-2"></i>修改個人資料
-                            </h2>
-                            <p class="mb-0 mt-2 opacity-75">更新您的個人資訊和密碼</p>
+
+    <div class="container py-5">
+        <div class="profile-wrapper">
+            <!-- 頁面標題 -->
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-2">個人資料設定</h2>
+                <p class="text-muted">自訂您的個人資訊，讓我們更了解您</p>
+            </div>
+
+            <div class="profile-card p-4 p-lg-5">
+                <?php if (isset($_SESSION['error']) || isset($_SESSION['success'])): ?>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-lg-10">
+                        <?php if (isset($_SESSION['error'])): ?>
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <div><?php echo $_SESSION['error'];
+                                            unset($_SESSION['error']); ?></div>
                         </div>
-                        <div class="card-body p-4">
-                            <?php if (isset($_SESSION['error'])): ?>
-                            <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
-                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                                <?php echo $_SESSION['error'];
-                                    unset($_SESSION['error']); ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                            <?php endif; ?>
+                        <?php endif; ?>
 
-                            <?php if (isset($_SESSION['success'])): ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <i class="bi bi-check-circle-fill me-2"></i>
-                                <?php echo $_SESSION['success'];
-                                    unset($_SESSION['success']); ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                            <?php endif; ?>
+                        <?php if (isset($_SESSION['success'])): ?>
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            <div><?php echo $_SESSION['success'];
+                                            unset($_SESSION['success']); ?></div>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
 
-                            <form method="POST" action="process/profile_process.php" class="mt-3">
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold">
-                                        <i class="bi bi-envelope me-2"></i>電子郵件
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light">
-                                            <i class="bi bi-at"></i>
-                                        </span>
+                <form method="POST" action="process/profile_process.php" class="needs-validation" novalidate>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <!-- 基本資料區塊 -->
+                            <div class="mb-5">
+                                <h5 class="section-title">基本資料</h5>
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label">
+                                            <i class="bi bi-envelope-fill me-2 text-primary"></i>電子郵件
+                                        </label>
                                         <input type="email" class="form-control" name="email"
                                             value="<?php echo htmlspecialchars($user['email']); ?>" required>
                                     </div>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold">
-                                        <i class="bi bi-telephone me-2"></i>聯絡電話
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light">
-                                            <i class="bi bi-phone"></i>
-                                        </span>
+                                    <div class="col-md-6">
+                                        <label class="form-label">
+                                            <i class="bi bi-telephone-fill me-2 text-primary"></i>聯絡電話
+                                        </label>
                                         <input type="tel" class="form-control" name="phone"
                                             value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>"
-                                            pattern="[0-9]{10}" title="請輸入10位數字的電話號碼">
+                                            pattern="[0-9]{10}">
+                                        <div class="form-text">請輸入10位數字的電話號碼</div>
                                     </div>
-                                    <small class="text-muted">請輸入10位數字的電話號碼</small>
                                 </div>
+                            </div>
 
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold">
-                                        <i class="bi bi-key me-2"></i>新密碼
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light">
-                                            <i class="bi bi-lock"></i>
-                                        </span>
+                            <!-- 密碼設定區塊 -->
+                            <div class="mb-5">
+                                <h5 class="section-title">密碼設定</h5>
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label">
+                                            <i class="bi bi-key-fill me-2 text-primary"></i>新密碼
+                                        </label>
                                         <input type="password" class="form-control" name="new_password" minlength="6">
+                                        <div class="form-text">如不修改請留空</div>
                                     </div>
-                                    <small class="text-muted">如不修改請留空</small>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold">
-                                        <i class="bi bi-check-circle me-2"></i>確認新密碼
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light">
-                                            <i class="bi bi-lock-fill"></i>
-                                        </span>
+                                    <div class="col-md-6">
+                                        <label class="form-label">
+                                            <i class="bi bi-shield-lock-fill me-2 text-primary"></i>確認新密碼
+                                        </label>
                                         <input type="password" class="form-control" name="confirm_password">
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="d-grid gap-3">
-                                    <button type="submit" class="btn btn-primary btn-lg">
-                                        <i class="bi bi-check2-circle me-2"></i>更新資料
-                                    </button>
-                                    <a href="dashboard.php" class="btn btn-outline-secondary">
-                                        <i class="bi bi-arrow-left me-2"></i>返回會員中心
-                                    </a>
-                                </div>
-                            </form>
+                            <!-- 按鈕區 -->
+                            <div class="d-flex gap-3 justify-content-center mt-5">
+                                <button type="submit" class="btn btn-primary px-5">
+                                    <i class="bi bi-check2-circle me-2"></i>儲存變更
+                                </button>
+                                <a href="dashboard.php" class="btn btn-outline-secondary px-5">
+                                    <i class="bi bi-arrow-left me-2"></i>返回
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        // 頁面載入效果
-        $('.content-wrapper').animate({
-            opacity: 1
-        }, 600);
-
-        // 如果有提示訊息，平滑顯示
-        $('.alert').fadeIn(800);
-
-        // 表單提交時的效果
-        $('form').on('submit', function() {
-            $('.content-wrapper').animate({
-                opacity: 0.6
-            }, 300);
-        });
-
-        // 返回會員中心按鈕點擊效果
-        $('.btn-outline-secondary').on('click', function(e) {
-            e.preventDefault(); // 防止立即跳轉
-            const href = $(this).attr('href'); // 保存要跳轉的URL
-
-            $('.content-wrapper').animate({
-                opacity: 0
-            }, 300, function() {
-                // 動畫完成後跳轉
-                window.location.href = href;
-            });
-        });
-    });
-    </script>
 </body>
 
 </html>
