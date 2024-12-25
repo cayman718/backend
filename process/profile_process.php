@@ -6,51 +6,61 @@ checkLogin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+    $phone = $_POST['phone'];
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
-    
+    $user_id = $_SESSION['user_id'];
+
     try {
-        // 檢查郵箱是否已被其他用戶使用
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ? AND id != ?");
-        $stmt->execute([$email, $_SESSION['user_id']]);
-        if ($stmt->fetchColumn() > 0) {
-            $_SESSION['error'] = "此電子郵件已被使用";
-            header("Location: ../profile.php");
-            exit();
+        // 先檢查欄位是否存在
+        $stmt = $pdo->query("SHOW COLUMNS FROM users LIKE 'phone'");
+        $exists = $stmt->fetch();
+
+        if (!$exists) {
+            // 如果欄位不存在，則新增
+            $pdo->exec("ALTER TABLE users ADD COLUMN phone VARCHAR(20)");
         }
-        
-        // 如果要更改密碼
+
+        // 開始交易
+        $pdo->beginTransaction();
+
+        // 基本資料更新（包含電話）
+        $sql = "UPDATE users SET email = ?, phone = ?";
+        $params = [$email, $phone];
+
+        // 如果有輸入新密碼
         if (!empty($new_password)) {
-            if (strlen($new_password) < 6) {
-                $_SESSION['error'] = "密碼長度必須至少為6個字符";
-                header("Location: ../profile.php");
-                exit();
-            }
-            
             if ($new_password !== $confirm_password) {
-                $_SESSION['error'] = "兩次輸入的密碼不一致";
+                $_SESSION['error'] = "兩次密碼輸入不一致";
                 header("Location: ../profile.php");
-                exit();
+                exit;
             }
-            
             $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare("UPDATE users SET email = ?, password = ? WHERE id = ?");
-            $stmt->execute([$email, $hashed_password, $_SESSION['user_id']]);
-        } else {
-            $stmt = $pdo->prepare("UPDATE users SET email = ? WHERE id = ?");
-            $stmt->execute([$email, $_SESSION['user_id']]);
+            $sql .= ", password = ?";
+            $params[] = $hashed_password;
         }
-        
-        $_SESSION['success'] = "個人資料更新成功！";
-        header("Location: ../profile.php");
-        exit();
-        
-    } catch(PDOException $e) {
-        $_SESSION['error'] = "更新失敗：" . $e->getMessage();
-        header("Location: ../profile.php");
-        exit();
+
+        $sql .= " WHERE id = ?";
+        $params[] = $user_id;
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+
+        // 提交交易
+        $pdo->commit();
+
+        $_SESSION['success'] = "資料更新成功！";
+    } catch (PDOException $e) {
+        // 發生錯誤時回滾交易
+        $pdo->rollBack();
+        $_SESSION['error'] = "更新失敗：" . $e->getMessage() .
+            "\n SQL: " . $sql .
+            "\n Params: " . print_r($params, true);
     }
+
+    header("Location: ../profile.php");
+    exit;
 }
 
 header("Location: ../profile.php");
-exit(); 
+exit();
